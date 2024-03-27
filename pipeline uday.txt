@@ -1,16 +1,20 @@
 pipeline {
     agent any
-   stages {
+    stages {
+        // make build
+        //maven is used
         stage('Build') {
             steps {
                 echo "Fetching the source code from GitHub"
-                echo "Compiling the code and generating artifacts." // will print
+                echo "Compiling the code and generating artifacts."
             }
         }
+        // test starts
+        //Selenium is used
         stage('Unit and Integration Tests') {
             steps {
-                echo "Running unit tests started and completed"
-                echo "Running integration tests started and completed"
+                echo "Running unit tests: started"
+                echo "Running integration tests: started"
             }
             post {
                 success {
@@ -25,14 +29,17 @@ pipeline {
                 }
             }
         }
+        //SONARQUBE is used
         stage('Code Analysis') {
             steps {
-                echo "Running Code Analysis started and completed"
+                echo "Running code analysis: started"
             }
         }
+
+        //OWASP is used
         stage('Security Scan') {
             steps {
-                echo "Running Security Scan started and completed"
+                echo "Running security scan: started"
             }
             post {
                 success {
@@ -47,14 +54,18 @@ pipeline {
                 }
             }
         }
+        
+        //AWS is used
         stage('Deploy to Staging') {
             steps {
-                echo "Running Deploy to Staging started and completed"
+                echo "Deploying to Staging: started"
             }
         }
+        
+        //AWS is used
         stage('Integration Tests on Staging') {
             steps {
-                echo "Running Integration Tests on Staging started and completed"
+                echo "Running integration tests on Staging: started"
             }
             post {
                 success {
@@ -69,9 +80,11 @@ pipeline {
                 }
             }
         }
+
+        //AWS is used
         stage('Deploy to Production') {
             steps {
-                echo "Running Integration Tests on Staging started and completed"
+                echo "Deploying to Production: started"
             }
         }
     }
